@@ -94,10 +94,13 @@ public class BankSystem {
                             System.out.println("You can't deposit a negative/zero amount.");
                         }
                         else {
-                            double currentBalance = bankAccounts.get(depositIndexInput).getBalance();
-                            bankAccounts.get(depositIndexInput).setBalance(depositInput + currentBalance);
-                            System.out.printf("%s of amount added to %s!\n", depositInput, bankAccounts.get(depositIndexInput).getHolder());
-                            break;
+                            try {
+                                bankAccounts.get(depositIndexInput).deposit(depositInput);
+                                System.out.printf("%s of amount added to %s!\n", depositInput, bankAccounts.get(depositIndexInput).getHolder());
+                                break;
+                            } catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
+                            }
                         }
                     }
 
@@ -115,21 +118,15 @@ public class BankSystem {
                     System.out.printf("\nAvailable balance: %s\n", bankAccounts.get(withdrawIndexInput).getBalance());
 
                     while (true) {
-                        System.out.print("\nEnter withdraw amount: ");
+                        System.out.print("Enter withdraw amount: ");
                         double withdrawInput = scannerObj.nextDouble();
 
-                        if (withdrawInput <= 0) {
-                            System.out.println("\nYou can't withdraw a negative/zero amount.\n");
-                        }
-                        else if (withdrawInput > bankAccounts.get(withdrawIndexInput).getBalance()) {
-                            System.out.println("\nYou can't withdraw amount larger than your balance.\n");
-                        }
-                        else {
-                            double currentBalance = bankAccounts.get(withdrawIndexInput).getBalance();
-                            bankAccounts.get(withdrawIndexInput).setBalance(currentBalance - withdrawInput);
-
+                        try {
+                            bankAccounts.get(withdrawIndexInput).withdraw(withdrawInput);
                             System.out.printf("** %s of amount withdrew from %s **\n", withdrawInput, bankAccounts.get(withdrawIndexInput).getHolder());
                             break;
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
                         }
                     }
 
@@ -144,7 +141,6 @@ public class BankSystem {
 
                 default:
                     System.out.println("\nNo such inputs. Try Again");
-
             }
         }
 
