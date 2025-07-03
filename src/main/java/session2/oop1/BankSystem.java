@@ -38,7 +38,7 @@ public class BankSystem {
 
                     //  initial deposit choice conditions
                     if (Objects.equals(initDepChoice, "Y") || Objects.equals(initDepChoice, "y")) {
-                        System.out.print("Enter initial deposit amount: ");
+                        System.out.print("Enter initial deposit amount: $");
                         double initDepoAmount = scannerObj.nextDouble();
                         bankAccounts.add(new BankAccount(acctHolderInput, acctNumInput, initDepoAmount));
 
@@ -75,7 +75,7 @@ public class BankSystem {
                     int balanceViewInput = scannerObj.nextInt();
 
                     System.out.printf("\nAccount holder: %s", bankAccounts.get(balanceViewInput).getHolder());
-                    System.out.printf("\nCurrent balance: %s", bankAccounts.get(balanceViewInput).getBalance());
+                    System.out.printf("\nCurrent balance: $%s", bankAccounts.get(balanceViewInput).getBalance());
 
                     break;
                 case 4:
@@ -84,10 +84,10 @@ public class BankSystem {
                     int depositIndexInput = scannerObj.nextInt();
 
                     System.out.printf("\nAccount holder: %s", bankAccounts.get(depositIndexInput).getHolder());
-                    System.out.printf("\nAvailable balance: %s\n", bankAccounts.get(depositIndexInput).getBalance());
+                    System.out.printf("\nAvailable balance: $%s\n", bankAccounts.get(depositIndexInput).getBalance());
 
                     while (true) {
-                        System.out.print("Enter deposit amount: ");
+                        System.out.print("Enter deposit amount: $");
                         double depositInput = scannerObj.nextDouble();
 
                         if (depositInput <= 0) {
@@ -96,7 +96,7 @@ public class BankSystem {
                         else {
                             try {
                                 bankAccounts.get(depositIndexInput).deposit(depositInput);
-                                System.out.printf("%s of amount added to %s!\n", depositInput, bankAccounts.get(depositIndexInput).getHolder());
+                                System.out.printf("$%s of amount added to %s!\n", depositInput, bankAccounts.get(depositIndexInput).getHolder());
                                 break;
                             } catch (IllegalArgumentException e) {
                                 System.out.println(e.getMessage());
@@ -105,7 +105,7 @@ public class BankSystem {
                     }
 
                     System.out.printf("\nAccount holder: %s", bankAccounts.get(depositIndexInput).getHolder());
-                    System.out.printf("\nAvailable balance: %s\n", bankAccounts.get(depositIndexInput).getBalance());
+                    System.out.printf("\nAvailable balance: $%s\n", bankAccounts.get(depositIndexInput).getBalance());
 
                     break;
 
@@ -115,15 +115,15 @@ public class BankSystem {
                     int withdrawIndexInput = scannerObj.nextInt();
 
                     System.out.printf("\nAccount holder: %s", bankAccounts.get(withdrawIndexInput).getHolder());
-                    System.out.printf("\nAvailable balance: %s\n", bankAccounts.get(withdrawIndexInput).getBalance());
+                    System.out.printf("\nAvailable balance: $%s\n", bankAccounts.get(withdrawIndexInput).getBalance());
 
                     while (true) {
-                        System.out.print("Enter withdraw amount: ");
+                        System.out.print("Enter withdraw amount: $");
                         double withdrawInput = scannerObj.nextDouble();
 
                         try {
                             bankAccounts.get(withdrawIndexInput).withdraw(withdrawInput);
-                            System.out.printf("** %s of amount withdrew from %s **\n", withdrawInput, bankAccounts.get(withdrawIndexInput).getHolder());
+                            System.out.printf("** $%s of amount withdrawn from %s **\n", withdrawInput, bankAccounts.get(withdrawIndexInput).getHolder());
                             break;
                         } catch (IllegalArgumentException e) {
                             System.out.println(e.getMessage());
@@ -131,7 +131,7 @@ public class BankSystem {
                     }
 
                     System.out.printf("\nAccount holder: %s", bankAccounts.get(withdrawIndexInput).getHolder());
-                    System.out.printf("\nAvailable balance: %s\n", bankAccounts.get(withdrawIndexInput).getBalance());
+                    System.out.printf("\nAvailable balance: $%s\n", bankAccounts.get(withdrawIndexInput).getBalance());
 
                     break;
 
@@ -152,7 +152,7 @@ public class BankSystem {
         for (BankAccount bankAccount : bankAccounts) {
             System.out.println("Holder: " + bankAccount.getHolder());
             System.out.println("Account Number: " + bankAccount.getAccountNumber());
-            System.out.println("Balance: " + bankAccount.getBalance());
+            System.out.println("Balance: $" + bankAccount.getBalance());
             System.out.println();
         }
         System.out.println();
